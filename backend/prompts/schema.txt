@@ -1,0 +1,17 @@
+Table: sales
+
+Columns:
+
+order_id (integer)
+order_date (date)
+product_id (integer)
+product_category (text)
+price (float)
+discount_percent (integer)
+quantity_sold (integer)
+customer_region (text)
+payment_method (text)
+rating (float)
+review_count (integer)
+discounted_price (float)
+total_revenue (float)
