@@ -30,16 +30,12 @@ def generate_dashboard(user_query: str):
     }
 
 def generate_additional_charts(user_query: str):
-    """Generate 2-3 additional relevant charts"""
+    """Generate 2-3 additional relevant charts based on context"""
     
     additional_charts = []
     
-    # Common supplementary queries based on the main query
-    supplementary_queries = [
-        "Show revenue by region",
-        "Show top 5 product categories by revenue", 
-        "Show monthly revenue trend"
-    ]
+    # Determine context-aware supplementary queries
+    supplementary_queries = get_contextual_queries(user_query)
     
     for supp_query in supplementary_queries[:2]:  # Limit to 2 additional charts
         try:
@@ -59,33 +55,82 @@ def generate_additional_charts(user_query: str):
     
     return additional_charts
 
+def get_contextual_queries(user_query: str):
+    """Generate contextually relevant queries based on the main query"""
+    
+    query_lower = user_query.lower()
+    
+    # Revenue-focused queries
+    if "revenue" in query_lower:
+        return [
+            "Show top 5 product categories by revenue",
+            "Show monthly revenue trend"
+        ]
+    
+    # Region-focused queries  
+    if "region" in query_lower:
+        return [
+            "Show revenue by region",
+            "Show average rating by region"
+        ]
+    
+    # Product-focused queries
+    if "product" in query_lower or "category" in query_lower:
+        return [
+            "Show revenue by region", 
+            "Show payment method distribution"
+        ]
+    
+    # Time-focused queries
+    if "monthly" in query_lower or "trend" in query_lower:
+        return [
+            "Show revenue by region",
+            "Show top 5 product categories by revenue"
+        ]
+    
+    # Default fallback queries
+    return [
+        "Show revenue by region",
+        "Show top 5 product categories by revenue"
+    ]
+
 def generate_insights(df, user_query: str):
     """Generate AI insights from the data"""
     
     # Convert dataframe to summary for LLM
     data_summary = df.head(10).to_string()
+    total_rows = len(df)
     
     prompt = f"""
-Analyze this data and provide 2-3 key business insights in bullet points.
-Be concise and focus on actionable findings.
+Analyze this business data and provide 2-3 key actionable insights in bullet points.
+Focus on trends, patterns, and business opportunities.
 
 User Query: {user_query}
+Total Records: {total_rows}
 
 Data Sample:
 {data_summary}
 
 Provide insights in this format:
-• Key insight 1
-• Key insight 2  
-• Key insight 3
+• Key insight about the data trend or pattern
+• Business opportunity or recommendation  
+• Notable finding or comparison
+
+Keep each insight concise and business-focused.
 """
     
     try:
         insights = ask_gemini(prompt)
         return insights.strip()
     except:
-        return "• Data analysis completed successfully"
+        return "• Data analysis completed successfully\n• Dashboard generated with multiple visualizations\n• Explore the charts above for detailed insights"
 
 def generate_chart_title(user_query: str):
     """Generate a clean title for the chart"""
-    return user_query.capitalize()
+    # Capitalize first letter and ensure it ends properly
+    title = user_query.strip()
+    if title:
+        title = title[0].upper() + title[1:]
+        if not title.endswith(('?', '.', '!')):
+            title += ""
+    return title or "Data Analysis"

@@ -22,6 +22,22 @@ def root():
     return {"message": "Conversational BI API running"}
 
 
+@app.get("/examples")
+def get_examples():
+    """Get example queries for the frontend"""
+    return {
+        "examples": [
+            "Show revenue by region",
+            "Top 5 product categories by revenue", 
+            "Monthly revenue trend for 2023",
+            "Average rating by product category",
+            "Payment method distribution",
+            "Show products with highest discount percentage",
+            "Revenue comparison between payment methods"
+        ]
+    }
+
+
 @app.post("/query")
 async def query_data(payload: dict):
 

@@ -1,22 +1,36 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import axios from "axios"
 
 interface PromptBoxProps {
   onSubmit: (query: string) => void
 }
 
-const EXAMPLE_QUERIES = [
-  "Show revenue by region",
-  "Top 5 product categories by revenue", 
-  "Monthly revenue trend for 2023",
-  "Average rating by product category",
-  "Payment method distribution"
-]
-
 export default function PromptBox({ onSubmit }: PromptBoxProps) {
 
   const [query, setQuery] = useState("")
+  const [examples, setExamples] = useState([
+    "Show revenue by region",
+    "Top 5 product categories by revenue", 
+    "Monthly revenue trend",
+    "Average rating by product category"
+  ])
+
+  useEffect(() => {
+    // Fetch dynamic examples from backend
+    const fetchExamples = async () => {
+      try {
+        const response = await axios.get("http://localhost:8000/examples")
+        setExamples(response.data.examples.slice(0, 5)) // Limit to 5 examples
+      } catch (error) {
+        // Keep default examples if fetch fails
+        console.log("Using default examples")
+      }
+    }
+    
+    fetchExamples()
+  }, [])
 
   const handleSubmit = () => {
     if (query.trim()) {
@@ -99,7 +113,7 @@ export default function PromptBox({ onSubmit }: PromptBoxProps) {
           flexWrap: "wrap", 
           gap: "8px" 
         }}>
-          {EXAMPLE_QUERIES.map((example, index) => (
+          {examples.map((example, index) => (
             <button
               key={index}
               style={{

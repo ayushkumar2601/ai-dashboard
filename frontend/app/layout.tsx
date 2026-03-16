@@ -1,5 +1,6 @@
 export const metadata = {
-  title: "Conversational BI Dashboard",
+  title: "AI Business Intelligence Dashboard",
+  description: "Conversational AI for instant business intelligence dashboards"
 }
 
 export default function RootLayout({
@@ -11,13 +12,20 @@ export default function RootLayout({
     <html>
       <body
         style={{
-          background: "#0f172a",
-          color: "white",
-          fontFamily: "sans-serif",
-          padding: "40px",
+          margin: 0,
+          padding: 0,
+          fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
+          background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+          minHeight: "100vh"
         }}
       >
-        {children}
+        <div style={{
+          background: "rgba(255, 255, 255, 0.95)",
+          minHeight: "100vh",
+          backdropFilter: "blur(10px)"
+        }}>
+          {children}
+        </div>
       </body>
     </html>
   )
