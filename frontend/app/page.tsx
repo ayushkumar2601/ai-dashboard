@@ -395,7 +395,7 @@ export default function Page() {
           <div style={{ minHeight: "calc(100vh - 58px)", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "60px 24px", animation: "fadeUp 0.6s ease both" }}>
 
             {/* Decorative ring */}
-            <div style={{ position: "relative", marginBottom: "52px" }}>
+            {/* <div style={{ position: "relative", marginBottom: "52px" }}>
               <div style={{ width: "120px", height: "120px", borderRadius: "50%", border: "1px solid rgba(225,50,90,0.15)", position: "absolute", top: "50%", left: "50%", transform: "translate(-50%,-50%)", animation: "pulse-ring 4s ease infinite" }} />
               <div style={{ width: "80px", height: "80px", borderRadius: "50%", border: "1px solid rgba(225,50,90,0.25)", position: "absolute", top: "50%", left: "50%", transform: "translate(-50%,-50%)", animation: "pulse-ring 4s ease infinite 0.5s" }} />
               <div style={{ width: "52px", height: "52px", borderRadius: "50%", background: "rgba(225,50,90,0.08)", border: "1px solid rgba(225,50,90,0.35)", display: "flex", alignItems: "center", justifyContent: "center" }}>
@@ -403,13 +403,13 @@ export default function Page() {
                   <path d="M3 16l5-5 4 4 7-9" stroke="var(--rose-vivid)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </div>
-            </div>
+            </div> */}
 
             {/* Badge */}
-            <div style={{ display: "inline-flex", alignItems: "center", gap: "8px", background: "rgba(225,50,90,0.08)", border: "1px solid rgba(225,50,90,0.2)", borderRadius: "100px", padding: "6px 16px", marginBottom: "28px" }}>
+            {/* <div style={{ display: "inline-flex", alignItems: "center", gap: "8px", background: "rgba(225,50,90,0.08)", border: "1px solid rgba(225,50,90,0.2)", borderRadius: "100px", padding: "6px 16px", marginBottom: "28px" }}>
               <div style={{ width: "5px", height: "5px", borderRadius: "50%", background: "var(--rose-vivid)", animation: "blink 2s ease infinite" }} />
               <span style={{ fontSize: "11px", color: "var(--rose-bright)", letterSpacing: "0.14em", fontFamily: "var(--font-display)" }}>AI-POWERED ANALYTICS</span>
-            </div>
+            </div> */}
 
             <h1 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(42px,6vw,76px)", fontWeight: 800, lineHeight: 1.04, letterSpacing: "-0.025em", textAlign: "center", marginBottom: "22px", maxWidth: "700px" }}>
               <span style={{ color: "#fdf0f3" }}>Ask anything.</span>
