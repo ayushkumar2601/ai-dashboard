@@ -1,316 +1,3 @@
-// // "use client"
-
-// // import axios from "axios"
-// // import { useState } from "react"
-
-// // import PromptBox from "../components/PromptBox"
-// // import DashboardGrid from "../components/DashboardGrid"
-
-// // export default function Page() {
-
-// //   const [result, setResult] = useState(null)
-// //   const [loading, setLoading] = useState(false)
-
-// //   async function runQuery(query: string) {
-// //     setLoading(true)
-    
-// //     try {
-// //       const res = await axios.post(
-// //         "http://localhost:8000/query",
-// //         { query }
-// //       )
-// //       setResult(res.data)
-// //     } catch (error) {
-// //       setResult({ error: "Failed to generate dashboard" })
-// //     } finally {
-// //       setLoading(false)
-// //     }
-// //   }
-
-// //   return (
-
-// //     <div style={{ padding: "20px", maxWidth: "1200px", margin: "0 auto" }}>
-
-// //       <h1 style={{ 
-// //         fontSize: "32px", 
-// //         marginBottom: "30px",
-// //         background: "linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)",
-// //         WebkitBackgroundClip: "text",
-// //         WebkitTextFillColor: "transparent",
-// //         fontWeight: "bold"
-// //       }}>
-// //         Conversational AI Dashboard
-// //       </h1>
-
-// //       <PromptBox onSubmit={runQuery} />
-
-// //       {loading && (
-// //         <div style={{ 
-// //           textAlign: "center", 
-// //           padding: "40px",
-// //           color: "#6366f1",
-// //           fontSize: "18px"
-// //         }}>
-// //           🤖 Generating your dashboard...
-// //         </div>
-// //       )}
-
-// //       {result && !result.error && !loading && (
-// //         <DashboardGrid result={result} />
-// //       )}
-
-// //       {result?.error && !loading && (
-// //         <div style={{ 
-// //           padding: "20px", 
-// //           background: "#fee2e2", 
-// //           borderRadius: "8px",
-// //           color: "#dc2626"
-// //         }}>
-// //           Error: {result.error}
-// //         </div>
-// //       )}
-
-// //     </div>
-// //   )
-// // }
-// "use client"
-
-// import axios from "axios"
-// import { useState } from "react"
-// import PromptBox from "../components/PromptBox"
-// import DashboardGrid from "../components/DashboardGrid"
-
-// export default function Page() {
-//   const [result, setResult] = useState<any>(null)
-//   const [loading, setLoading] = useState(false)
-
-//   async function runQuery(query: string) {
-//     setLoading(true)
-//     setResult(null)
-//     try {
-//       const res = await axios.post("http://localhost:8000/query", { query })
-//       setResult(res.data)
-//     } catch (error) {
-//       setResult({ error: "Failed to generate dashboard" })
-//     } finally {
-//       setLoading(false)
-//     }
-//   }
-
-//   return (
-//     <div style={{ position: "relative", zIndex: 1, minHeight: "100vh" }}>
-
-//       {/* Top bar */}
-//       <header style={{
-//         position: "fixed",
-//         top: 0, left: 0, right: 0,
-//         height: "56px",
-//         borderBottom: "1px solid var(--border-subtle)",
-//         background: "rgba(5,5,8,0.8)",
-//         backdropFilter: "blur(20px)",
-//         display: "flex",
-//         alignItems: "center",
-//         padding: "0 32px",
-//         justifyContent: "space-between",
-//         zIndex: 100,
-//       }}>
-//         <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-//           <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-//             <polygon points="10,1 13,8 20,8 14.5,13 16.5,20 10,16 3.5,20 5.5,13 0,8 7,8" fill="none" stroke="var(--accent-cyan)" strokeWidth="1.2"/>
-//           </svg>
-//           <span style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "15px", letterSpacing: "0.15em", color: "var(--text-primary)" }}>AXIOM</span>
-//           <span style={{ fontSize: "11px", color: "var(--text-muted)", letterSpacing: "0.1em", marginLeft: "4px" }}>INTELLIGENCE</span>
-//         </div>
-//         <div style={{ display: "flex", gap: "6px", alignItems: "center" }}>
-//           <div style={{ width: "6px", height: "6px", borderRadius: "50%", background: "#22c55e", boxShadow: "0 0 8px #22c55e" }}></div>
-//           <span style={{ fontSize: "12px", color: "var(--text-secondary)" }}>Live</span>
-//         </div>
-//       </header>
-
-//       {/* Main content */}
-//       <main style={{ paddingTop: "56px" }}>
-
-//         {/* Hero / Prompt area */}
-//         {!result && !loading && (
-//           <div style={{
-//             minHeight: "calc(100vh - 56px)",
-//             display: "flex",
-//             flexDirection: "column",
-//             alignItems: "center",
-//             justifyContent: "center",
-//             padding: "40px 24px",
-//             animation: "fadeUp 0.6s ease both",
-//           }}>
-//             {/* Headline */}
-//             <div style={{ textAlign: "center", marginBottom: "52px" }}>
-//               <div style={{
-//                 display: "inline-flex",
-//                 alignItems: "center",
-//                 gap: "8px",
-//                 background: "rgba(99,218,255,0.07)",
-//                 border: "1px solid rgba(99,218,255,0.15)",
-//                 borderRadius: "100px",
-//                 padding: "6px 14px",
-//                 marginBottom: "28px",
-//               }}>
-//                 <div style={{ width: "5px", height: "5px", borderRadius: "50%", background: "var(--accent-cyan)", animation: "blink 2s ease infinite" }}></div>
-//                 <span style={{ fontSize: "11px", color: "var(--accent-cyan)", letterSpacing: "0.12em", fontFamily: "var(--font-display)" }}>AI-POWERED ANALYTICS</span>
-//               </div>
-//               <h1 style={{
-//                 fontFamily: "var(--font-display)",
-//                 fontSize: "clamp(40px, 6vw, 72px)",
-//                 fontWeight: 800,
-//                 lineHeight: 1.05,
-//                 letterSpacing: "-0.02em",
-//                 marginBottom: "20px",
-//                 background: "linear-gradient(135deg, var(--text-primary) 40%, var(--text-secondary) 100%)",
-//                 WebkitBackgroundClip: "text",
-//                 WebkitTextFillColor: "transparent",
-//               }}>
-//                 Ask anything.<br/>See everything.
-//               </h1>
-//               <p style={{ fontSize: "16px", color: "var(--text-secondary)", fontWeight: 300, maxWidth: "420px", lineHeight: 1.7 }}>
-//                 Transform your data into instant insights with conversational AI. No SQL. No setup. Just answers.
-//               </p>
-//             </div>
-
-//             <PromptBox onSubmit={runQuery} />
-//           </div>
-//         )}
-
-//         {/* Loading state */}
-//         {loading && (
-//           <div style={{
-//             minHeight: "calc(100vh - 56px)",
-//             display: "flex",
-//             flexDirection: "column",
-//             alignItems: "center",
-//             justifyContent: "center",
-//             gap: "24px",
-//             animation: "fadeUp 0.4s ease both",
-//           }}>
-//             <div style={{ position: "relative", width: "64px", height: "64px" }}>
-//               <div style={{
-//                 position: "absolute", inset: 0,
-//                 border: "1px solid rgba(99,218,255,0.15)",
-//                 borderRadius: "50%",
-//                 animation: "pulse-ring 2s ease infinite",
-//               }}></div>
-//               <div style={{
-//                 position: "absolute", inset: "8px",
-//                 border: "1px solid transparent",
-//                 borderTopColor: "var(--accent-cyan)",
-//                 borderRadius: "50%",
-//                 animation: "spin-slow 1s linear infinite",
-//               }}></div>
-//               <div style={{
-//                 position: "absolute", inset: "16px",
-//                 border: "1px solid transparent",
-//                 borderTopColor: "var(--accent-violet)",
-//                 borderRadius: "50%",
-//                 animation: "spin-slow 1.5s linear infinite reverse",
-//               }}></div>
-//               <div style={{
-//                 position: "absolute",
-//                 top: "50%", left: "50%",
-//                 transform: "translate(-50%, -50%)",
-//                 width: "8px", height: "8px",
-//                 borderRadius: "50%",
-//                 background: "var(--accent-cyan)",
-//                 boxShadow: "0 0 12px var(--accent-cyan)",
-//               }}></div>
-//             </div>
-//             <div style={{ textAlign: "center" }}>
-//               <p style={{ fontFamily: "var(--font-display)", fontSize: "14px", letterSpacing: "0.1em", color: "var(--text-secondary)" }}>GENERATING INSIGHTS</p>
-//               <p style={{ fontSize: "12px", color: "var(--text-muted)", marginTop: "6px" }}>Analyzing your data...</p>
-//             </div>
-//           </div>
-//         )}
-
-//         {/* Result */}
-//         {result && !result.error && !loading && (
-//           <div style={{ padding: "32px 32px 80px", animation: "fadeUp 0.5s ease both" }}>
-//             <div style={{ maxWidth: "1400px", margin: "0 auto" }}>
-
-//               {/* New query bar at top */}
-//               <div style={{ marginBottom: "40px", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "16px" }}>
-//                 <div>
-//                   <p style={{ fontFamily: "var(--font-display)", fontSize: "11px", letterSpacing: "0.12em", color: "var(--text-muted)", marginBottom: "6px" }}>DASHBOARD GENERATED</p>
-//                   <h2 style={{ fontFamily: "var(--font-display)", fontSize: "22px", fontWeight: 700, color: "var(--text-primary)" }}>Results Overview</h2>
-//                 </div>
-//                 <button
-//                   onClick={() => { setResult(null) }}
-//                   style={{
-//                     display: "flex", alignItems: "center", gap: "8px",
-//                     padding: "10px 20px",
-//                     background: "var(--bg-card)",
-//                     border: "1px solid var(--border-subtle)",
-//                     borderRadius: "10px",
-//                     color: "var(--text-secondary)",
-//                     fontSize: "13px",
-//                     cursor: "pointer",
-//                     fontFamily: "var(--font-body)",
-//                     transition: "all 0.2s",
-//                   }}
-//                   onMouseOver={e => { e.currentTarget.style.borderColor = "var(--border-glow)"; e.currentTarget.style.color = "var(--accent-cyan)"; }}
-//                   onMouseOut={e => { e.currentTarget.style.borderColor = "var(--border-subtle)"; e.currentTarget.style.color = "var(--text-secondary)"; }}
-//                 >
-//                   <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-//                     <path d="M2 7h10M7 2l5 5-5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-//                   </svg>
-//                   New Query
-//                 </button>
-//               </div>
-
-//               <DashboardGrid result={result} />
-//             </div>
-//           </div>
-//         )}
-
-//         {/* Error */}
-//         {result?.error && !loading && (
-//           <div style={{
-//             minHeight: "calc(100vh - 56px)",
-//             display: "flex",
-//             alignItems: "center",
-//             justifyContent: "center",
-//             padding: "40px",
-//           }}>
-//             <div style={{
-//               padding: "32px 40px",
-//               background: "rgba(239,68,68,0.06)",
-//               border: "1px solid rgba(239,68,68,0.15)",
-//               borderRadius: "16px",
-//               textAlign: "center",
-//               maxWidth: "480px",
-//             }}>
-//               <div style={{ fontSize: "32px", marginBottom: "16px" }}>⚠</div>
-//               <p style={{ fontFamily: "var(--font-display)", fontSize: "16px", fontWeight: 600, color: "#f87171", marginBottom: "8px" }}>Query Failed</p>
-//               <p style={{ fontSize: "14px", color: "var(--text-secondary)" }}>{result.error}</p>
-//               <button
-//                 onClick={() => setResult(null)}
-//                 style={{
-//                   marginTop: "24px",
-//                   padding: "10px 24px",
-//                   background: "rgba(239,68,68,0.1)",
-//                   border: "1px solid rgba(239,68,68,0.2)",
-//                   borderRadius: "8px",
-//                   color: "#f87171",
-//                   fontSize: "13px",
-//                   cursor: "pointer",
-//                   fontFamily: "var(--font-body)",
-//                 }}
-//               >
-//                 Try Again
-//               </button>
-//             </div>
-//           </div>
-//         )}
-
-//       </main>
-//     </div>
-//   )
-// }
 "use client"
 
 import axios from "axios"
@@ -318,6 +5,73 @@ import { useState } from "react"
 import PromptBox from "../components/PromptBox"
 import DashboardGrid from "../components/DashboardGrid"
 
+// ── Quick Answer summary card ─────────────────────────────────────────
+function QuickAnswer({ query, insights }: { query: string; insights: string }) {
+  const [expanded, setExpanded] = useState(false)
+
+  const getSummary = (raw: string): string => {
+    if (!raw) return ""
+    const cleaned = raw.replace(/\*\*(.*?)\*\*/g, "$1").replace(/\*(.*?)\*/g, "$1").trim()
+    const sentences = cleaned
+      .split(/(?<=[.!?])\s+/)
+      .map(s => s.replace(/^[-•·*\d.]+\s*/, "").trim())
+      .filter(s => s.length > 20)
+    const scored = sentences.map(s => ({
+      text: s,
+      score: (s.match(/\d/g)?.length || 0) * 2 + (s.length > 60 ? 1 : 0),
+    }))
+    scored.sort((a, b) => b.score - a.score)
+    return scored.slice(0, 3).map(s => s.text).join(" ")
+  }
+
+  const summary = getSummary(insights)
+  if (!summary) return null
+
+  const words = summary.split(" ")
+  const shortSummary = words.slice(0, 32).join(" ") + (words.length > 32 ? "…" : "")
+  const displayText = expanded ? summary : shortSummary
+
+  return (
+    <div style={{
+      marginBottom: "20px",
+      padding: "18px 22px",
+      background: "rgba(255,255,255,0.04)",
+      backdropFilter: "blur(20px)",
+      border: "1px solid rgba(255,255,255,0.09)",
+      borderRadius: "16px",
+      display: "flex",
+      alignItems: "flex-start",
+      gap: "14px",
+      animation: "fadeUp 0.4s ease 0.1s both",
+      boxShadow: "inset 0 1px 0 rgba(255,255,255,0.06)",
+      position: "relative",
+      overflow: "hidden",
+    }}>
+      <div style={{ position: "absolute", left: 0, top: 0, bottom: 0, width: "3px", background: "linear-gradient(180deg, #ff6b9d, #c084fc, #22d3ee)", borderRadius: "3px 0 0 3px" }} />
+      <div style={{ flexShrink: 0, width: "34px", height: "34px", borderRadius: "10px", background: "rgba(255,107,157,0.12)", border: "1px solid rgba(255,107,157,0.25)", display: "flex", alignItems: "center", justifyContent: "center", marginLeft: "6px" }}>
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <circle cx="8" cy="8" r="6" stroke="#ff6b9d" strokeWidth="1.3"/>
+          <path d="M5.5 8h5M8 5.5v5" stroke="#ff6b9d" strokeWidth="1.3" strokeLinecap="round"/>
+        </svg>
+      </div>
+      <div style={{ flex: 1, minWidth: 0 }}>
+        <p style={{ fontSize: "10px", color: "rgba(255,107,157,0.8)", letterSpacing: "0.14em", fontFamily: "var(--font-display)", fontWeight: 700, marginBottom: "6px" }}>
+          AI SUMMARY
+        </p>
+        <p style={{ fontSize: "14px", color: "rgba(255,255,255,0.82)", lineHeight: 1.7, fontWeight: 300, fontFamily: "var(--font-body)", margin: 0 }}>
+          {displayText}
+        </p>
+        {words.length > 32 && (
+          <button onClick={() => setExpanded(v => !v)} style={{ marginTop: "8px", background: "none", border: "none", color: "rgba(255,107,157,0.7)", fontSize: "12px", cursor: "pointer", fontFamily: "var(--font-body)", fontWeight: 500, padding: 0, letterSpacing: "0.04em" }}>
+            {expanded ? "Show less ↑" : "Read more ↓"}
+          </button>
+        )}
+      </div>
+    </div>
+  )
+}
+
+// ── Page ──────────────────────────────────────────────────────────────
 export default function Page() {
   const [result, setResult] = useState<any>(null)
   const [loading, setLoading] = useState(false)
@@ -337,8 +91,6 @@ export default function Page() {
     }
   }
 
-  const isHome = !result && !loading
-
   return (
     <div style={{ minHeight: "100vh", background: "#0a0608", position: "relative" }}>
 
@@ -357,7 +109,6 @@ export default function Page() {
         display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0 28px",
       }}>
         <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-          {/* Logo mark */}
           <div style={{ position: "relative", width: "28px", height: "28px" }}>
             <div style={{ position: "absolute", inset: 0, border: "1.5px solid rgba(225,50,90,0.5)", borderRadius: "6px", transform: "rotate(45deg)" }} />
             <div style={{ position: "absolute", inset: "5px", background: "var(--rose-vivid)", borderRadius: "2px", transform: "rotate(45deg)" }} />
@@ -366,7 +117,6 @@ export default function Page() {
           <div style={{ width: "1px", height: "16px", background: "rgba(255,255,255,0.1)" }} />
           <span style={{ fontSize: "11px", color: "var(--text-muted)", letterSpacing: "0.12em" }}>INTELLIGENCE</span>
         </div>
-
         <div style={{ display: "flex", alignItems: "center", gap: "20px" }}>
           {result && !result.error && (
             <button onClick={() => setResult(null)} style={{
@@ -374,8 +124,8 @@ export default function Page() {
               borderRadius: "8px", color: "var(--rose-bright)", fontSize: "12px", cursor: "pointer",
               fontFamily: "var(--font-body)", letterSpacing: "0.05em", transition: "all 0.2s",
             }}
-              onMouseOver={e => { e.currentTarget.style.background = "rgba(225,50,90,0.18)"; e.currentTarget.style.borderColor = "rgba(225,50,90,0.4)"; }}
-              onMouseOut={e => { e.currentTarget.style.background = "rgba(225,50,90,0.1)"; e.currentTarget.style.borderColor = "rgba(225,50,90,0.25)"; }}
+              onMouseOver={e => { e.currentTarget.style.background = "rgba(225,50,90,0.18)"; e.currentTarget.style.borderColor = "rgba(225,50,90,0.4)" }}
+              onMouseOut={e => { e.currentTarget.style.background = "rgba(225,50,90,0.1)"; e.currentTarget.style.borderColor = "rgba(225,50,90,0.25)" }}
             >
               + New Query
             </button>
@@ -390,12 +140,10 @@ export default function Page() {
       {/* Main */}
       <main style={{ paddingTop: "58px", position: "relative", zIndex: 1 }}>
 
-        {/* Hero / Home */}
-        {isHome && (
+        {/* Hero */}
+        {!result && !loading && (
           <div style={{ minHeight: "calc(100vh - 58px)", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "60px 24px", animation: "fadeUp 0.6s ease both" }}>
-
-            {/* Decorative ring */}
-            {/* <div style={{ position: "relative", marginBottom: "52px" }}>
+            <div style={{ position: "relative", marginBottom: "52px" }}>
               <div style={{ width: "120px", height: "120px", borderRadius: "50%", border: "1px solid rgba(225,50,90,0.15)", position: "absolute", top: "50%", left: "50%", transform: "translate(-50%,-50%)", animation: "pulse-ring 4s ease infinite" }} />
               <div style={{ width: "80px", height: "80px", borderRadius: "50%", border: "1px solid rgba(225,50,90,0.25)", position: "absolute", top: "50%", left: "50%", transform: "translate(-50%,-50%)", animation: "pulse-ring 4s ease infinite 0.5s" }} />
               <div style={{ width: "52px", height: "52px", borderRadius: "50%", background: "rgba(225,50,90,0.08)", border: "1px solid rgba(225,50,90,0.35)", display: "flex", alignItems: "center", justifyContent: "center" }}>
@@ -403,14 +151,11 @@ export default function Page() {
                   <path d="M3 16l5-5 4 4 7-9" stroke="var(--rose-vivid)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </div>
-            </div> */}
-
-            {/* Badge */}
-            {/* <div style={{ display: "inline-flex", alignItems: "center", gap: "8px", background: "rgba(225,50,90,0.08)", border: "1px solid rgba(225,50,90,0.2)", borderRadius: "100px", padding: "6px 16px", marginBottom: "28px" }}>
+            </div>
+            <div style={{ display: "inline-flex", alignItems: "center", gap: "8px", background: "rgba(225,50,90,0.08)", border: "1px solid rgba(225,50,90,0.2)", borderRadius: "100px", padding: "6px 16px", marginBottom: "28px" }}>
               <div style={{ width: "5px", height: "5px", borderRadius: "50%", background: "var(--rose-vivid)", animation: "blink 2s ease infinite" }} />
               <span style={{ fontSize: "11px", color: "var(--rose-bright)", letterSpacing: "0.14em", fontFamily: "var(--font-display)" }}>AI-POWERED ANALYTICS</span>
-            </div> */}
-
+            </div>
             <h1 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(42px,6vw,76px)", fontWeight: 800, lineHeight: 1.04, letterSpacing: "-0.025em", textAlign: "center", marginBottom: "22px", maxWidth: "700px" }}>
               <span style={{ color: "#fdf0f3" }}>Ask anything.</span>
               <br />
@@ -418,11 +163,9 @@ export default function Page() {
                 See everything.
               </span>
             </h1>
-
             <p style={{ fontSize: "16px", color: "var(--text-secondary)", fontWeight: 300, maxWidth: "420px", lineHeight: 1.8, textAlign: "center", marginBottom: "52px" }}>
               Transform raw data into stunning Power BI-grade dashboards with a single sentence.
             </p>
-
             <PromptBox onSubmit={runQuery} />
           </div>
         )}
@@ -448,14 +191,19 @@ export default function Page() {
         {result && !result.error && !loading && (
           <div style={{ padding: "28px 28px 80px", animation: "fadeUp 0.5s ease both" }}>
             <div style={{ maxWidth: "1600px", margin: "0 auto" }}>
+
               {/* Query echo */}
-              <div style={{ marginBottom: "28px", display: "flex", alignItems: "center", gap: "14px" }}>
+              <div style={{ marginBottom: "20px", display: "flex", alignItems: "center", gap: "14px" }}>
                 <div style={{ width: "3px", height: "36px", background: "linear-gradient(180deg, var(--rose-vivid), var(--gold))", borderRadius: "2px" }} />
                 <div>
                   <p style={{ fontSize: "11px", color: "var(--text-muted)", letterSpacing: "0.1em", marginBottom: "4px" }}>QUERY RESULT</p>
                   <p style={{ fontFamily: "var(--font-display)", fontSize: "18px", fontWeight: 700, color: "#fdf0f3" }}>"{lastQuery}"</p>
                 </div>
               </div>
+
+              {/* Quick answer */}
+              <QuickAnswer query={lastQuery} insights={result.insights} />
+
               <DashboardGrid result={result} />
             </div>
           </div>
@@ -474,6 +222,7 @@ export default function Page() {
             </div>
           </div>
         )}
+
       </main>
     </div>
   )
